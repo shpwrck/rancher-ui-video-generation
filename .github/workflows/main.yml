@@ -5,8 +5,12 @@ jobs:
   create-cluster:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Contents
+        uses: actions/checkout@v2
       - name: Create Kind Cluster
         uses: helm/kind-action@v1.2.0
+        with: 
+          config: .github/workflows/kind-config.yml
       - name: Install Helm
         run: |
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
@@ -18,12 +22,12 @@ jobs:
           helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.5.1
       - name: Install Rancher
         run: |
+          kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
           kubectl create namespace cattle-system
           helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
           helm repo update
           helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.my.org --set bootstrapPassword=admin
-          sleep 200
-          kubectl port-forward -n cattle-system --timeout=600s deployment/rancher 8443:443 &
+          kubectl wait --for=condition=Available --timeout=500s -n cattle-system deployment/rancher
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -34,8 +38,6 @@ jobs:
           pip install pytest
           playwright install
           pip install pytest-playwright
-      - name: Checkout Contents
-        uses: actions/checkout@v2
       - name: Generate Artifact
         run: |
           pytest test-canvas.py --video on
