@@ -1,0 +1,44 @@
+name: Build Video
+on: push
+
+jobs:
+  create-cluster:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Kind Cluster
+        uses: helm/kind-action@v1.2.0
+      - name: Install Helm
+        run: |
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+      - name: Install Cert-manager
+        run: |
+          kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.5.1/cert-manager.crds.yaml
+          helm repo add jetstack https://charts.jetstack.io
+          helm repo update
+          helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --version v1.5.1
+      - name: Install Rancher
+        run: |
+          kubectl create namespace cattle-system
+          helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
+          helm repo update
+          helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.my.org --set bootstrapPassword=admin
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Setup Playwright
+        run: |
+          pip install playwright
+          pip install pytest
+          playwright install
+          pip install pytest-playwright
+      - name: Checkout Contents
+        uses: actions/checkout@v2
+      - name: Generate Artifact
+        run: |
+          pytest test-canvas.py --video on
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: test-results
