@@ -23,7 +23,7 @@ jobs:
           helm repo update
           helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.my.org --set bootstrapPassword=admin
           kubectl wait --for=condition=Available -n cattle-system deployment/rancher
-          kubectl port-forward -n cattle-system deployment/rancher 8443:443 &
+          kubectl port-forward -n cattle-system --timeout=600s deployment/rancher 8443:443 &
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
