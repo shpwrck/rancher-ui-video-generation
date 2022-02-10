@@ -10,7 +10,7 @@ jobs:
       - name: Create Kind Cluster
         uses: helm/kind-action@v1.2.0
         with: 
-          config: .github/workflows/kind-config.yml
+          config: files/kind-config.yml
       - name: Install Ingress
         run: |
           kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
@@ -36,7 +36,7 @@ jobs:
           kubectl wait --for=condition=Available --timeout=500s -n cattle-system deployment/rancher
           kubectl patch settings first-login --type='json' -p='[{"op": "replace", "path": "/value", "value": "false"}]'
           kubectl patch user $(kubectl get user -l authz.management.cattle.io/bootstrapping=admin-user -o jsonpath='{.items[*].metadata.name}') --type='json' -p='[{"op": "replace", "path": "/mustChangePassword", "value": False}]'
-          kubectl apply -f .github/workflows/userPreferences.yml -n $(kubectl get user -l authz.management.cattle.io/bootstrapping=admin-user -o jsonpath='{.items[*].metadata.name}')
+          kubectl apply -f files/userPreferences.yml -n $(kubectl get user -l authz.management.cattle.io/bootstrapping=admin-user -o jsonpath='{.items[*].metadata.name}')
           sleep 30
       - name: Set up Python
         uses: actions/setup-python@v2
