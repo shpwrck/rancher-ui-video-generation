@@ -16,12 +16,12 @@ def test_canvas(page):
     page.click("input[type=\"text\"]")
     page.type("input[type=\"text\"]", "admin", delay=100)
     page.press("input[type=\"text\"]", "Tab")
-    page.type("input[type=\"password\"]", "password", delay=100)
+    page.type("input[type=\"password\"]", "admin", delay=100)
     with page.expect_navigation():
         page.click("button:has-text(\"Log in with Local User\")")
     page.wait_for_timeout(2000)
 
-    page.click("text=local")
+    page.click("a:has-text(\"local\")")
     page.click(".icon.icon-terminal.icon-lg")
     page.focus("text=Connected")
     page.wait_for_timeout(2000)
