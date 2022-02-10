@@ -6,7 +6,7 @@ def browser_context_args(browser_context_args):
     return {
         **browser_context_args,
         "ignore_https_errors": True,
-        "base_url": "https://localhost:8443"
+        "base_url": "https://localhost:443"
     }
 
 def test_canvas(page):
