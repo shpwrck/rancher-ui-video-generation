@@ -23,10 +23,11 @@ jobs:
       - name: Install Rancher
         run: |
           kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+          kubectl wait --for=condition=Available --timeout=500s -n ingress-nginx deployment/ingress-nginx-controller
           kubectl create namespace cattle-system
           helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
           helm repo update
-          helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.my.org --set bootstrapPassword=admin
+          helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=localhost --set bootstrapPassword=admin
           kubectl wait --for=condition=Available --timeout=500s -n cattle-system deployment/rancher
       - name: Set up Python
         uses: actions/setup-python@v2
