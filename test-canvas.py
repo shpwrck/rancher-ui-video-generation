@@ -1,3 +1,4 @@
+# Run `kubectl get pods -A` on local
 def test_canvas(page):
     page.goto("/dashboard/auth/login")
     page.wait_for_timeout(1000)
