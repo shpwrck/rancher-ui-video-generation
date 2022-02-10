@@ -1,0 +1,37 @@
+---
+apiVersion: management.cattle.io/v3
+kind: Preference
+metadata:
+  name: cluster
+value: local
+---
+apiVersion: management.cattle.io/v3
+kind: Preference
+metadata:
+  name: home-page-cards
+value: '{"commercialSupportTip":true,"setLoginPage":true,"migrationTip":true,"communitySupportTip":true,"welcomeBanner":true}'
+---
+apiVersion: management.cattle.io/v3
+kind: Preference
+metadata:
+  name: last-visited
+value: '{"name":"home","params":{}}'
+---
+apiVersion: management.cattle.io/v3
+kind: Preference
+metadata:
+  name: ns-by-cluster
+value: '{"local":[]}'
+---
+apiVersion: management.cattle.io/v3
+kind: Preference
+metadata:
+  name: read-whatsnew
+value: '"v2.6.3"'
+---
+apiVersion: management.cattle.io/v3
+kind: Preference
+metadata:
+  name: seen-whatsnew
+value: '"v2.6.3"'
+---
