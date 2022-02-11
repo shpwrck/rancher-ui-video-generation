@@ -51,7 +51,7 @@ jobs:
       - name: Generate Artifact
         continue-on-error: true
         run: |
-          pytest test-canvas.py --video on --slowmo 100
+          pytest test-canvas.py --video on --slowmo 10
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
