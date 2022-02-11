@@ -54,14 +54,16 @@ jobs:
           pytest test-canvas.py --video on --slowmo 10
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
+        if: startsWith(github.ref, 'refs/tags/')
         with:
           name: videos
           path: videos
       - name: Setup ffmpeg
         uses: FedericoCarboni/setup-ffmpeg@v1
       - name: Convert webm to mp4
+        if: startsWith(github.ref, 'refs/tags/')
         run: |
-          ffmpeg -i test_canvas_chromium.webm test_canvas_chromium.mp4 
+          ffmpeg -i videos/test_canvas_chromium.webm videos/test_canvas_chromium.mp4 
       - name: Create Release
         uses: fnkr/github-action-ghr@v1
         if: startsWith(github.ref, 'refs/tags/')
