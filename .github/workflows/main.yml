@@ -57,7 +57,13 @@ jobs:
         with:
           name: videos
           path: videos
-      - uses: fnkr/github-action-ghr@v1
+      - name: Setup ffmpeg
+        uses: FedericoCarboni/setup-ffmpeg@v1
+      - name: Convert webm to mp4
+        run: |
+          ffmpeg -i test_canvas_chromium.webm test_canvas_chromium.mp4 
+      - name: Create Release
+        uses: fnkr/github-action-ghr@v1
         if: startsWith(github.ref, 'refs/tags/')
         env:
           GHR_PATH: videos 
