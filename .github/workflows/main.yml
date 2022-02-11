@@ -3,7 +3,7 @@ on: push
 
 jobs:
   create-cluster:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Checkout Contents
         uses: actions/checkout@v2
