@@ -38,6 +38,7 @@ jobs:
           kubectl patch user $(kubectl get user -l authz.management.cattle.io/bootstrapping=admin-user -o jsonpath='{.items[*].metadata.name}') --type='json' -p='[{"op": "replace", "path": "/mustChangePassword", "value": False}]'
           kubectl create namespace $(kubectl get user -l authz.management.cattle.io/bootstrapping=admin-user -o jsonpath='{.items[*].metadata.name}')
           kubectl apply -f files/userPreferences.yml -n $(kubectl get user -l authz.management.cattle.io/bootstrapping=admin-user -o jsonpath='{.items[*].metadata.name}')
+          sleep 30
       - name: Set up Python
         uses: actions/setup-python@v2
         with:

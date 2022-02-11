@@ -11,7 +11,13 @@ def test_canvas(page):
         page.click("button:has-text(\"Log in with Local User\")")
     page.wait_for_timeout(1000)
 
+    page.locator("a:has-text(\"local\")")
+    page.wait_for_timeout(1000)
+
     page.click("a:has-text(\"local\")")
+    page.wait_for_timeout(1000)
+
+    page.locator(".icon.icon-terminal.icon-lg").hover()
     page.wait_for_timeout(1000)
 
     page.click(".icon.icon-terminal.icon-lg")
