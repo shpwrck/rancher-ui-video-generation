@@ -1,7 +1,7 @@
 # Run `kubectl get pods -A` on local
 def test_canvas(page):
     page.goto("/dashboard/auth/login")
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     page.click("input[type=\"text\"]")
     page.type("input[type=\"text\"]", "admin")
@@ -9,20 +9,20 @@ def test_canvas(page):
     page.type("input[type=\"password\"]", "twelvecharacters")
     with page.expect_navigation():
         page.click("button:has-text(\"Log in with Local User\")")
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     page.locator("a:has-text(\"local\")")
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     page.click("a:has-text(\"local\")")
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     page.locator(".icon.icon-terminal.icon-lg").hover()
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     page.click(".icon.icon-terminal.icon-lg")
     page.focus("text=Connected")
-    page.wait_for_timeout(1000)
+    page.wait_for_timeout(2000)
 
     page.type(":nth-match(canvas, 4)", "kubectl get pods -A")
     page.press(":nth-match(canvas, 4)", "Enter")
