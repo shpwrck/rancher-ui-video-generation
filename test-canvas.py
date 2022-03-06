@@ -6,7 +6,7 @@ def test_canvas(page):
     page.click("input[type=\"text\"]")
     page.type("input[type=\"text\"]", "admin")
     page.press("input[type=\"text\"]", "Tab")
-    page.type("input[type=\"password\"]", "admin")
+    page.type("input[type=\"password\"]", "twelvecharacters")
     with page.expect_navigation():
         page.click("button:has-text(\"Log in with Local User\")")
     page.wait_for_timeout(1000)
