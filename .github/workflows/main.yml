@@ -48,6 +48,9 @@ jobs:
           pip install pytest
           playwright install
           pip install pytest-playwright
+      - name: Sleep
+        run: |
+          sleep 100
       - name: Generate Artifact
         continue-on-error: true
         run: |
