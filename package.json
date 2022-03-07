@@ -1,0 +1,21 @@
+{
+  "name": "rancher-ui-video-generation",
+  "version": "1.0.0",
+  "description": "* python3 * pip * nodejs * pytest",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shpwrck/rancher-ui-video-generation.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shpwrck/rancher-ui-video-generation/issues"
+  },
+  "homepage": "https://github.com/shpwrck/rancher-ui-video-generation#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.19.2"
+  }
+}
