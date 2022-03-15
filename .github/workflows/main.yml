@@ -1,5 +1,5 @@
 name: Build Video
-on: push
+on: release
 
 jobs:
   create-cluster:

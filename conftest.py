@@ -21,7 +21,7 @@ def browser_context_args(browser_context_args, video_path):
         **browser_context_args,
         "record_video_dir": video_path,
         "base_url": "https://localhost",
-        "ignore_https_errors": True
+        "ignore_https_errors": True,
     }
 
 @pytest.fixture(scope="session")
