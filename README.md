@@ -2,9 +2,9 @@
 
 * Install Playwright using [Node.js instructions](https://playwright.dev/docs/next/intro).
 * Generate Rancher environment
-** set RANCHER_URL (e.g. https://rancher.env/dashboard/login/auth)
-** set RANCHER_USERNAME (e.g. admin)
-** set RANCHER_PASSWORD (e.g. password)
+  * set RANCHER_URL (e.g. https://rancher.env/dashboard/login/auth)
+  * set RANCHER_USERNAME (e.g. admin)
+  * set RANCHER_PASSWORD (e.g. password)
 * Generate login state: `npx playwright test`
 * Generate test:
 ```
