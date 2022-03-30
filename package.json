@@ -17,5 +17,8 @@
   "homepage": "https://github.com/shpwrck/rancher-ui-video-generation#readme",
   "devDependencies": {
     "@playwright/test": "^1.20.1"
+  },
+  "dependencies": {
+    "ghost-cursor-playwright": "^2.0.2"
   }
 }

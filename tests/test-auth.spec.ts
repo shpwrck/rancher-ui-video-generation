@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-
+import { createCursor } from 'ghost-cursor-playwright';
 
 test.use({
   viewport: {
@@ -9,6 +9,9 @@ test.use({
 });
 
 test('iam', async ({ page }) => {
+  // Create Cursor
+  const cursor = await createCursor(page);
+
   // Go to https://rancher.skrzypek.dev/dashboard
   await page.goto('https://rancher.skrzypek.dev/dashboard/home');
 

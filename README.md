@@ -17,11 +17,24 @@ npx playwright codegen                  \
 * Copy test to /tests with filename: <FILENAME>.spec.ts
 * Generate video: `npx playwright test`
 
+## Configuration
+
+Configuration can be made in the playwright.config.ts file, but do note that the viewport size should be set from the test. (Based on my testing)
+
 ## Optional
 
 Convert webm to mp4:
 ```
 ffmpeg -i test-results/test-auth-iam-chromium/video.webm videos/mp4/video.mp4
+```
+
+Generate a cursor:
+```test.spec.ts
+...
+import { createCursor } from 'ghost-cursor-playwright';
+...
+const cursor = await createCursor(page);
+...
 ```
 
 ## Notes
