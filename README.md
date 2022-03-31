@@ -10,8 +10,8 @@
 ```
 npx playwright codegen                  \
     https://$RANCHER_URL/dashboard/home \
-    --viewport-size 2560,1440           \
-    -o <OUTPUTFILENAME>                 \
+    --viewport-size 1920,1080           \
+    -o $OUTPUT_FILENAME                 \
     --load-storage ./storageState.json
 ```
 * Copy test to /tests with filename: <FILENAME>.spec.ts

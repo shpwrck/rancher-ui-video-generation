@@ -5,7 +5,7 @@ async function globalSetup(config: FullConfig) {
   const browser = await chromium.launch();
   const page = await browser.newPage();
   // Go to https://rancher.skrzypek.dev/dashboard/auth/login
-  await page.goto("https://" + process.env["RANCHER_LOGIN_URL"] + "/dashboard/auth/login");
+  await page.goto("https://" + process.env["RANCHER_URL"] + "/dashboard/auth/login");
 
   // Click input[type="text"]
   await page.locator('input[type="text"]').click();
