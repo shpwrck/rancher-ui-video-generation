@@ -13,7 +13,7 @@ test('test-iam', async ({ page }) => {
   const cursor = await createCursor(page);
 
 await page.waitForTimeout(1000);
-  await page.goto('https://rancher.skrzypek.dev/dashboard/home');
+  await page.goto("https://" + process.env["RANCHER_URL"]);
 
 await page.waitForTimeout(1000);
   await page.locator('svg').hover();
@@ -29,7 +29,6 @@ await page.waitForTimeout(1000);
 await page.waitForTimeout(1000);
   await page.locator('text=Create').hover();
   await page.locator('text=Create').click();
-  await expect(page).toHaveURL('https://rancher.skrzypek.dev/dashboard/c/local/auth/management.cattle.io.user/create');
 
 await page.waitForTimeout(1000);
   await page.locator('[placeholder="e\\.g\\. jsmith"]').hover();
@@ -85,7 +84,7 @@ await page.waitForTimeout(1000);
   await page.locator('[placeholder="A unique name"]').click();
 
 await page.waitForTimeout(1000);
-  await page.locator('[placeholder="A unique name"]').fill('global-role-example');
+  await page.locator('[placeholder="A unique name"]').fill('A-Global-Role-Example');
 
 await page.waitForTimeout(1000);
   await page.locator('#vs1__combobox').hover();
@@ -100,8 +99,8 @@ await page.waitForTimeout(1000);
   await page.locator('#vs2__combobox').click();
   
 await page.waitForTimeout(1000);
-  await page.locator('#vs2__option-0 >> text=Addons').hover();
-  await page.locator('#vs2__option-0 >> text=Addons').click();
+  await page.locator('#vs2__option-1 >> text=Apps').hover();
+  await page.locator('#vs2__option-1 >> text=Apps').click();
   
 await page.waitForTimeout(1000);
   await Promise.all([
