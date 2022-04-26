@@ -21,7 +21,7 @@ async function globalSetup(config: FullConfig) {
 
   // Click button:has-text("Log in with Local User")
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/home' }*/),
+    page.waitForNavigation(),
     page.locator('button:has-text("Log in with Local User")').click()
   ]);
 
