@@ -147,9 +147,6 @@ test('edit-workload', async ({ page }) => {
   await page.locator('[placeholder="e\\.g\\. 8080"]').fill('8080');
 
   await page.waitForTimeout(1000);
-  await page.locator('span:has-text("Node Scheduling")').click();
-
-  await page.waitForTimeout(1000);
   await page.locator('span:has-text("Storage")').click();
 
   await page.waitForTimeout(1000);
@@ -196,7 +193,6 @@ test('delete-workload', async ({ page }) => {
 
   await page.waitForTimeout(1000);
   await page.locator('h6:has-text("Workload")').click();
-  await expect(page).toHaveURL('https://rec.skrzypek.dev/dashboard/c/c-m-v7xs5g5x/explorer/workload');
 
   await page.waitForTimeout(1000);
   await page.locator('[placeholder="Filter"]').click();
