@@ -9,155 +9,163 @@ test.use({
   storageState: './storageState.json'
 });
 
-test('test-iam', async ({ page }) => {
+test('iam-rbac', async ({ page }) => {
   const cursor = await createCursor(page);
-
-  await page.waitForTimeout(1000);
+  await page.waitForTimeout(500);
   await page.goto("https://" + process.env["RANCHER_URL"]);
 
   await page.waitForTimeout(1000);
-  await page.locator('svg').hover();
   await page.locator('svg').click();
 
   await page.waitForTimeout(1000);
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/local/auth/management.cattle.io.user' }*/),
+    page.waitForNavigation(),
     page.locator('text=Users & Authentication').hover(),
+    await page.waitForTimeout(1000),
     page.locator('text=Users & Authentication').click()
   ]);
 
   await page.waitForTimeout(1000);
-  await page.locator('text=Create').hover();
-  await page.locator('text=Create').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('[placeholder="e\\.g\\. jsmith"]').hover();
-  await page.locator('[placeholder="e\\.g\\. jsmith"]').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('[placeholder="e\\.g\\. jsmith"]').fill('example');
-
-  await page.waitForTimeout(1000);
-  await page.locator('text=Ask user to change their password on next login Generate a random password New P >> span[role="checkbox"]').nth(1).hover();
-  await page.locator('text=Ask user to change their password on next login Generate a random password New P >> span[role="checkbox"]').nth(1).click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('text=Ask user to change their password on next login Generate a random password Gener >> span[role="checkbox"]').first().hover();
-  await page.locator('text=Ask user to change their password on next login Generate a random password Gener >> span[role="checkbox"]').first().click();
-
-  await page.waitForTimeout(1000);
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/local/auth/management.cattle.io.user' }*/),
-    page.locator('button:has-text("Create")').hover(),
-    page.locator('button:has-text("Create")').click()
+    page.waitForNavigation(),
+    page.locator('text=Auth Provider').hover(),
+    await page.waitForTimeout(1000),
+    page.locator('text=Auth Provider').click()
   ]);
 
   await page.waitForTimeout(1000);
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/local/auth/roles#GLOBAL' }*/),
-    page.locator('a:has-text("Roles")').hover(),
-    page.locator('a:has-text("Roles")').click()
+    page.waitForNavigation(),
+    page.locator('text=ActiveDirectory').hover(),
+    await page.waitForTimeout(1000),
+    page.locator('text=ActiveDirectory').click()
   ]);
 
   await page.waitForTimeout(1000);
-  await page.locator('a[role="tab"]:has-text("Cluster")').click();
+  await page.locator('text=Auth Provider').click();
+
+  await page.locator('text=AzureAD').hover();
+  await page.waitForTimeout(1000);
+  await page.locator('text=AzureAD').click();
 
   await page.waitForTimeout(1000);
-  await page.locator('a[role="tab"]:has-text("Project/Namespaces")').click();
+  await page.locator('text=Auth Provider').click();
+
+  await page.locator('text=Okta').hover();
+  await page.waitForTimeout(1000);
+  await page.locator('text=Okta').click();
 
   await page.waitForTimeout(1000);
-  await page.locator('a[role="tab"]:has-text("Global")').click();
+  await page.locator('text=Auth Provider').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('span:has-text("Users")').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('tr:nth-child(2) td:nth-child(8)').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('text=Edit Config').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="Administrator"]').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="Restricted Administrator"]').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="Restricted Administrator"]').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="User-Base"]').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="Manage Users"]').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="Manage Roles"]').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('[aria-label="Manage Settings"]').click();
 
   await page.waitForTimeout(1000);
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/_/auth/roles/management.cattle.io.globalrole/create?roleContext=GLOBAL#grant-resources' }*/),
-    page.locator('text=Create Global Role').hover(),
-    page.locator('text=Create Global Role').click()
+    page.waitForNavigation(),
+    page.locator('button:has-text("Save")').hover(),
+    await page.waitForTimeout(1000),
+    page.locator('button:has-text("Save")').click()
   ]);
 
   await page.waitForTimeout(1000);
-  await page.locator('text=GlobalRole: Create Name * Description New User Default Yes: Default role for new').hover();
-  await page.locator('text=GlobalRole: Create Name * Description New User Default Yes: Default role for new').click();
+  await Promise.all([
+    page.waitForNavigation(),
+    page.locator('text=Roles').hover(),
+    await page.waitForTimeout(1000),
+    page.locator('text=Roles').click()
+  ]);
 
   await page.waitForTimeout(1000);
-  await page.locator('[placeholder="A unique name"]').hover();
+  await page.locator('span:has-text("Global")').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('ul[role="tablist"] >> text=Cluster').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('text=Project/Namespaces').click();
+
+  await page.waitForTimeout(1000);
+  await Promise.all([
+    page.waitForNavigation(),
+    page.locator('text=Create Project/Namespaces Role').hover(),
+    await page.waitForTimeout(1000),
+    page.locator('text=Create Project/Namespaces Role').click()
+  ]);
+
+  await page.waitForTimeout(1000);
   await page.locator('[placeholder="A unique name"]').click();
 
   await page.waitForTimeout(1000);
-  await page.locator('[placeholder="A unique name"]').fill('A-Global-Role-Example');
+  await page.locator('[placeholder="A unique name"]').fill('examplerole');
 
   await page.waitForTimeout(1000);
-  await page.locator('#vs1__combobox').hover();
-  await page.locator('#vs1__combobox').click();
+  await page.locator('.unlabeled-select').first().click();
 
   await page.waitForTimeout(1000);
-  await page.locator('#vs1__option-0 >> text=create').hover();
-  await page.locator('#vs1__option-0 >> text=create').click();
+  await page.locator('text=delete').click();
 
   await page.waitForTimeout(1000);
-  await page.locator('#vs2__combobox').hover();
-  await page.locator('#vs2__combobox').click();
+  await page.locator('.columns div:nth-child(2) .unlabeled-select').click();
 
   await page.waitForTimeout(1000);
-  await page.locator('#vs2__option-1 >> text=Apps').hover();
-  await page.locator('#vs2__option-1 >> text=Apps').click();
+  await page.locator('text=ConfigMaps').click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('input[type="text"]').nth(2).click();
+
+  await page.waitForTimeout(1000);
+  await page.locator('input[type="text"]').nth(2).fill('*');
 
   await page.waitForTimeout(1000);
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/_/auth/roles#GLOBAL' }*/),
+    page.waitForNavigation(),
     page.locator('button:has-text("Create")').hover(),
+    await page.waitForTimeout(1000),
     page.locator('button:has-text("Create")').click()
   ]);
 
   await page.waitForTimeout(1000);
-  await page.locator('text=Groups').hover();
-  await page.locator('text=Groups').click();
+  await page.locator('text=Download YAML Delete Actions State Display Name Name Built-In Project Creator De >> [placeholder="Filter"]').click();
 
   await page.waitForTimeout(1000);
   await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/local/auth/config' }*/),
-    page.locator('nav >> text=Auth Provider').hover(),
-    page.locator('nav >> text=Auth Provider').click()
+    page.waitForNavigation(),
+    page.locator('text=Download YAML Delete Actions State Display Name Name Built-In Project Creator De >> [placeholder="Filter"]').fill('example')
   ]);
 
   await page.waitForTimeout(1000);
-  await Promise.all([
-    page.waitForNavigation(/*{ url: 'https://rancher.skrzypek.dev/dashboard/c/local/auth/config/azuread?mode=edit' }*/),
-    page.locator('text=AzureAD').hover(),
-    page.locator('text=AzureAD').click()
-  ]);
+  await page.locator('#NAMESPACE div .sortable-table tbody .main-row .row-check').click();
 
   await page.waitForTimeout(1000);
-  await page.locator('#tenant-id').hover();
-  await page.locator('#tenant-id').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('#tenant-id').fill('example tenant id');
-
-  await page.waitForTimeout(1000);
-  await page.locator('text=Application ID * Application Secret * >> [placeholder="A long UUID string"]').hover();
-  await page.locator('text=Application ID * Application Secret * >> [placeholder="A long UUID string"]').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('text=Application ID * Application Secret * >> [placeholder="A long UUID string"]').fill('example application id');
-
-  await page.waitForTimeout(1000);
-  await page.locator('input[type="password"]').hover();
-  await page.locator('input[type="password"]').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('input[type="password"]').fill('example application serect');
-
-  await page.waitForTimeout(1000);
-  await page.locator('button:has-text("Cancel")').hover();
-  await page.locator('button:has-text("Cancel")').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('.menu').hover();
-  await page.locator('.menu').click();
-
-  await page.waitForTimeout(1000);
-  await page.locator('text=Home').hover();
-  await page.locator('text=Home').click();
+  await page.locator('text=Download YAML Delete Actions 1 selected >> #promptRemove').click();
 
 });
