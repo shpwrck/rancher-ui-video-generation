@@ -22,6 +22,10 @@ test('imported', async ({ page }) => {
     page.locator('text=Create').click()
   ]);
 
+  await page.locator('text=Google GKE').hover();
+  await page.waitForTimeout(1000);
+  await page.locator('text=Azure AKS').hover();
+  await page.waitForTimeout(1000);
   await page.locator('text=Amazon EKS').hover();
   await page.waitForTimeout(1000);
   await page.locator('text=Amazon EKS').click();
@@ -46,12 +50,6 @@ test('imported', async ({ page }) => {
   await page.frameLocator('#ember-iframe').locator('text=Next: Select Security Group').hover();
   await page.waitForTimeout(1000);
   await page.frameLocator('#ember-iframe').locator('text=Next: Select Security Group').click();
-
-  await page.waitForTimeout(1000);
-  await page.frameLocator('#ember-iframe').locator('text=SSH Key GPU Enabled Instance Request Spot Instances >> input[type="text"]').click();
-
-  await page.waitForTimeout(1000);
-  await page.frameLocator('#ember-iframe').locator('text=none selected').click();
 
   await page.waitForTimeout(1000);
   await page.frameLocator('#ember-iframe').locator('#ember126').click();
